@@ -2,12 +2,17 @@
 title: 'Tutorial 1: Exploratory analysis of pharmacogenomic data'
 author: "Alejandro Reyes"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r echo=FALSE}
 knitr::opts_chunk$set(cache=FALSE)
+```
+
+```{r Example]}
+x<-rnorm(100,0,1)
+plot(x)
 ```
 
 ## Introduction

@@ -59,9 +59,9 @@ the values that are out of range. Are these due to technical
 issues? Biology?
 
 ```{r ques4}
-range( pharmacoData$viability )
-sum( pharmacoData$viability < 0 )
-sum( pharmacoData$viability > 100 )
+table=tapply(pharmacoData$viability, pharmacoData$drug, function(x){length(x[x>=0 & x<=100])})
+sum(pharmacoData$viability >= 0 & pharmacoData$viability <=100)
+data.frame(sort(table))
 ```
 
 
@@ -82,12 +82,30 @@ str(pharmacoData)
 doses. Are stronger drug concentrations consistent with lower viability scores?
  
 ```{r quest3}
-ggplot(data=pharmacoData, aes(viability))+geom_histogram()+facet_wrap(~drug)
+ggplot( pharmacoData, aes( viability, group=doseID, colour=doseID) ) +
+    geom_histogram(fill="white", lwd=2, alpha=0.1) + xlim(0, 170) + facet_wrap(~doseID)
 ``` 
 
 ### Using Correlation Measures to Assess Replicability of Drug Response Studies
 
+```{r tut2}
+library(PharmPlotter)
+data("summarizedData")
+cellLinesSummary <- summarizedData
+str(cellLinesSummary)
+
+length(unique(cellLinesSummary$cellLine))
+length(unique(cellLinesSummary$drug))
+```
+
 1. Create a scatterplot for each drug comparing the AUC in GDSC and CCLE for all cell lines (hint: code from Tutorial 2 may help).
+
+```{r tut2 ques1}
+library(ggplot2)
+ggplot(aes(x=auc_GDSC, y=auc_CCLE, colour=drug), data=subset(cellLinesSummary)) + geom_point() +
+    xlab("GDSC AUC") +
+    ylab("CCLE AUC") 
+```
 
 2. Calculate correlation coefficients of the AUC in GDSC and CCLE for each drug (hint: code from Tutorial 2 may help). 
 

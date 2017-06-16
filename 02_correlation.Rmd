@@ -3,8 +3,8 @@ title: 'Tutorial 2: Using Correlation Measures to Assess Replicability of Drug R
   Studies'
 author: "Keegan Korthauer"
 output:
-  pdf_document: default
   html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
